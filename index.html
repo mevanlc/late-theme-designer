@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>late.sh Theme Designer</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="designer-shell">
+      <section class="terminal-stage" aria-label="late.sh dashboard mockup">
+        <div class="terminal" data-token-bg="bg_canvas">
+          <div class="frame" data-token="border_active">
+            <div class="titlebar">
+              <span class="brand" data-token="text_bright">late.sh</span>
+              <span class="pipe" data-token="border_dim">|</span>
+              <span class="tab active" data-token="amber">1</span>
+              <span class="tab" data-token="text_dim">2</span>
+              <span class="tab" data-token="text_dim">3</span>
+              <span class="tab" data-token="text_dim">4</span>
+              <span class="tab" data-token="text_dim">5</span>
+              <span class="pipe" data-token="border_dim">|</span>
+              <span class="page-title" data-token="text_muted">Dashboard</span>
+            </div>
+
+            <div class="content-grid">
+              <div class="dashboard-pane">
+                <div class="top-grid">
+                  <section class="tui-block stream-card" data-token="border">
+                    <div class="block-title">Stream</div>
+                    <div class="stream-copy">
+                      <div class="muted" data-token="text_dim">Playing: <span data-token="amber">Ketsa - Shining Still</span></div>
+                      <div>
+                        <span data-token="text_dim">Vibe: </span><span class="key" data-token="amber">Lofi</span>
+                        <span data-token="text_dim"> Next: </span><span class="key" data-token="amber">Lofi</span>
+                        <span data-token="text_dim"> Switch in 18:53</span>
+                      </div>
+                      <div>
+                        <span data-token="text_dim">No audio? </span>
+                        <span class="key" data-token="amber_dim">B</span>
+                        <span data-token="text_faint"> CLI </span>
+                        <span class="key" data-token="amber_dim">P</span>
+                        <span data-token="text_faint"> web</span>
+                      </div>
+                    </div>
+                  </section>
+
+                  <section class="tui-block vote-card" data-token="border">
+                    <div class="block-title">Vote Next (L/A/C)</div>
+                    <div class="vote-line">
+                      <span class="key" data-token="amber">L</span>
+                      <span data-token="text">Lofi</span>
+                      <span class="bar fill" data-token="success">██████</span><span class="bar" data-token="border">░░░</span>
+                      <span data-token="text_dim"> 4 ✓</span>
+                    </div>
+                    <div class="vote-line">
+                      <span class="key" data-token="amber">A</span>
+                      <span data-token="text">Ambient</span>
+                      <span class="bar fill" data-token="amber_dim">███</span><span class="bar" data-token="border">░░░░░</span>
+                      <span data-token="text_dim"> 2</span>
+                    </div>
+                    <div class="vote-line">
+                      <span class="key" data-token="amber">C</span>
+                      <span data-token="text">Classic</span>
+                      <span class="bar fill" data-token="amber_dim">██</span><span class="bar" data-token="border">░░░░░░</span>
+                      <span data-token="text_dim"> 1</span>
+                    </div>
+                  </section>
+                </div>
+
+                <section class="blackjack-strip">
+                  <div class="strip-grid">
+                    <div class="strip-slot">
+                      <div>
+                        <span class="dim" data-token="amber_dim">○○○○ 0/4</span>
+                        <span class="bright" data-token="amber"> Blackjack Table [b1]</span>
+                        <span class="slot-key" data-token="amber">[b+1]</span>
+                      </div>
+                      <div><span data-token="amber">Quick</span><span data-token="text_dim"> · 10 chips · betting</span></div>
+                    </div>
+                    <div class="strip-slot">
+                      <div>
+                        <span class="dim" data-token="amber_dim">○○○○ 2/4</span>
+                        <span class="bright" data-token="amber"> Blackjack Table [b2]</span>
+                        <span class="slot-key" data-token="amber">[b+2]</span>
+                      </div>
+                      <div><span data-token="amber">Standard</span><span data-token="text_dim"> · 10 chips · idle</span></div>
+                    </div>
+                    <div class="strip-slot">
+                      <div>
+                        <span class="dim" data-token="amber_dim">○○○○ ?/4</span>
+                        <span class="label" data-token="amber"> Blackjack Table [b3]</span>
+                        <span class="slot-key" data-token="amber">[b+3]</span>
+                      </div>
+                      <div><span data-token="amber">Quick</span><span data-token="text_dim"> · 10 chips · idle</span></div>
+                    </div>
+                  </div>
+                </section>
+
+                <section class="chat-card">
+                  <div class="chat-log">
+                    <div class="message">
+                      <span class="body" data-token="chat_body">then click :D</span>
+                    </div>
+                    <div class="message">
+                      <span class="body" data-token="chat_body">try it</span>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">mat</span>
+                        <span class="badge" data-token="badge_gold">✿</span>
+                        <span data-token="text_faint">[5 mins ago]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">ok, bouncing, have a great time everyone :)</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kirii.md</span>
+                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
+                        <span data-token="text_faint">[4 mins ago]</span>
+                      </div>
+                      <div>
+                        <span class="quote" data-token="amber_dim">&gt; @mat: ok, bouncing, have a great time everyone :)</span>
+                      </div>
+                      <div class="body" data-token="chat_body">hav a nice day mat :D</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">wranglyph-2</span>
+                        <span data-token="text_faint">· [3 mins ago]</span>
+                      </div>
+                      <div>
+                        <span class="quote" data-token="amber_dim">&gt; @kirii.md: if you're using kitty</span>
+                      </div>
+                      <div class="body" data-token="chat_body">pretty sure I'm using gnome, actually, but I'll check out kitty one of these days.</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kirii.md</span>
+                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
+                        <span data-token="text_faint">[2 mins ago]</span>
+                      </div>
+                      <div>
+                        <span class="quote" data-token="amber_dim">&gt; @wranglyph-2: pretty sure I'm using gnome, actually, but I'll...</span>
+                      </div>
+                      <div class="body" data-token="chat_body">ohhh.... I think u can ?</div>
+                      <div class="body" data-token="chat_body">I don't don't gnome that much</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">graybeard</span>
+                        <span data-token="text_faint">· [2 mins ago]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">the stream switcher is behaving now. classic fades in without popping.</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author bot" data-token="bot">dealer</span>
+                        <span data-token="text_faint">· [1 min ago]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">blackjack table b2 is waiting for bets.</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">nora</span>
+                        <span class="badge" data-token="badge_silver">◇</span>
+                        <span data-token="text_faint">[1 min ago]</span>
+                      </div>
+                      <div>
+                        <span class="quote" data-token="amber_dim">&gt; @graybeard: classic fades in without popping.</span>
+                      </div>
+                      <div class="body" data-token="chat_body">that transition is so much nicer. tiny polish, big relief.</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">mevanlc</span>
+                        <span class="badge" data-token="badge_gold">⌁ ✿</span>
+                        <span data-token="text_faint">[just now]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">I'm going to make u a theme designer webpage</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">wranglyph-2</span>
+                        <span data-token="text_faint">· [just now]</span>
+                      </div>
+                      <div>
+                        <span class="quote" data-token="amber_dim">&gt; @kirii.md: I think u can ?</span>
+                      </div>
+                      <div class="body" data-token="chat_body">ok so it turns out that it's already set to ctrl c, but it doesn't work in here because you can't highlight the text</div>
+                    </div>
+                    <div class="message grouped selected" data-token-bg="bg_selection">
+                      <div class="meta">
+                        <span class="selector" data-token="amber">▸</span>
+                        <span class="author" data-token="chat_author">kirii.md</span>
+                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
+                        <span data-token="text_faint">[just now]</span>
+                      </div>
+                      <div>
+                        <span class="quote" data-token="amber_dim">&gt; @mevanlc: I'm going to make u a theme designer webpage</span>
+                      </div>
+                      <div class="body" data-token="chat_body">HA??? RLLY!?!??!</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kirii.md</span>
+                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
+                        <span data-token="text_faint">[just now]</span>
+                      </div>
+                      <div class="body shout" data-token="chat_body">WOULD BE SO NICE SO I DON'T HAVE TO GUESS AND RELOAD THE APP</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">mevanlc</span>
+                        <span class="badge" data-token="badge_gold">⌁ ✿</span>
+                        <span data-token="text_faint">[just now]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">first pass will be webpage, live preview, and export. then we can hook it to actual palette files.</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author bot" data-token="bot">@bot</span>
+                        <span data-token="text_faint">· [just now]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">palette draft saved locally. no reload required.</div>
+                    </div>
+                  </div>
+
+                  <div class="composer tui-block" data-token="border">
+                    <div class="block-title">Compose (press i)</div>
+                    <span data-token="text_dim">Type a message · j/k select · /binds · ask </span>
+                    <span data-token="mention">@bot</span>
+                  </div>
+                </section>
+              </div>
+
+              <aside class="sidebar-pane">
+                <div class="mentions" data-token="mention">1 unread mention</div>
+                <section class="tui-block mini" data-token="border">
+                  <div class="block-title">Time</div>
+                  <span data-token="amber_dim">◷</span>
+                  <span data-token="text_dim">Sun</span>
+                  <strong data-token="amber">16:00</strong>
+                </section>
+
+                <section class="tui-block visualizer" data-token="border_active">
+                  <div class="block-title">Visualizer</div>
+                  <div class="viz-bars" data-token="amber">
+                    <span style="height: 62%"></span>
+                    <span style="height: 34%"></span>
+                    <span style="height: 80%"></span>
+                    <span style="height: 48%"></span>
+                    <span style="height: 72%"></span>
+                    <span style="height: 24%"></span>
+                    <span style="height: 58%"></span>
+                  </div>
+                </section>
+
+                <section class="tui-block now-playing" data-token="border">
+                  <div class="block-title">Now Playing</div>
+                  <div data-token="text_dim">Yawner</div>
+                  <div data-token="text_bright">Midnight static</div>
+                  <div><span data-token="amber">2:14</span> <span data-token="border_dim">────●────</span></div>
+                  <div data-token="text_faint">No pair</div>
+                </section>
+
+                <section class="tui-block activity" data-token="border">
+                  <div class="block-title">Activity</div>
+                  <div><span data-token="success">●</span> <strong data-token="amber">18</strong> <span data-token="text_dim">online</span></div>
+                  <div data-token="text_muted">@graybeard  12s</div>
+                  <div data-token="text_dim">joined blackjack</div>
+                  <div data-token="text_muted">@nora  1m</div>
+                  <div data-token="text_dim">sent a message</div>
+                </section>
+
+                <section class="tui-block bonsai" data-token="border">
+                  <div class="block-title">Bonsai (9d)</div>
+                  <pre><span data-token="bonsai_canopy">       .*o*o*o*.
+      *oo*oo*oo*.
+     .*o*o*o*o*o*.
+      '*o|o|o*o*'</span>
+<span data-token="amber">         | |
+         | |
+        /   \
+        |   |
+        |   |
+        |   |
+         \ /
+          V
+          |
+         .|.</span>
+<span data-token="text_dim">        [===]</span></pre>
+                  <div><span data-token="bonsai_leaf">Watered today</span></div>
+                </section>
+              </aside>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <dialog class="theme-dialog" open aria-labelledby="dialog-title">
+        <form method="dialog" class="dialog-surface">
+          <header class="dialog-header">
+            <div>
+              <h1 id="dialog-title">Theme Components</h1>
+              <label class="preset-field">
+                <span>Preset</span>
+                <select id="presetSelect"></select>
+              </label>
+            </div>
+            <button id="resetButton" class="icon-button" type="button" title="Reset colors">↺</button>
+          </header>
+
+          <div id="tokenList" class="token-list"></div>
+
+          <footer class="dialog-footer">
+            <button id="exportButton" class="command-button" type="button">Export</button>
+          </footer>
+        </form>
+      </dialog>
+
+      <dialog id="exportDialog" class="export-dialog" aria-labelledby="export-title">
+        <form method="dialog" class="export-surface">
+          <header class="dialog-header">
+            <div>
+              <h1 id="export-title">Export Palette</h1>
+              <p>Rust palette snippet</p>
+            </div>
+            <button class="icon-button" value="cancel" title="Close">×</button>
+          </header>
+
+          <textarea id="exportText" class="export-preview" spellcheck="false"></textarea>
+
+          <footer class="export-actions">
+            <span id="copyStatus" data-token="text_dim"></span>
+            <button id="copyButton" class="command-button" type="button">Copy</button>
+          </footer>
+        </form>
+      </dialog>
+    </main>
+
+    <script src="themes.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
