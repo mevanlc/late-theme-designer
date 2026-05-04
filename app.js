@@ -76,6 +76,7 @@ const designerShell = document.querySelector(".designer-shell");
 const themePanel = document.querySelector("#themePanel");
 const hideThemePanel = document.querySelector("#hideThemePanel");
 const showThemePanel = document.querySelector("#showThemePanel");
+const useBackgroundColor = document.querySelector("#useBackgroundColor");
 
 function cssVarName(token) {
   return `--${token.replaceAll("_", "-")}`;
@@ -227,6 +228,14 @@ function applyTheme() {
   for (const [token] of tokens) {
     document.documentElement.style.setProperty(cssVarName(token), theme[token]);
   }
+  applyBackgroundColorMode();
+}
+
+function applyBackgroundColorMode() {
+  document.documentElement.toggleAttribute(
+    "data-static-background",
+    !useBackgroundColor.checked,
+  );
 }
 
 resetButton.addEventListener("click", () => {
@@ -271,6 +280,8 @@ showThemePanel.addEventListener("click", () => {
   themePanel.removeAttribute("aria-hidden");
   showThemePanel.hidden = true;
 });
+
+useBackgroundColor.addEventListener("change", applyBackgroundColorMode);
 
 applyTheme();
 renderPresetOptions();

@@ -1,5 +1,6 @@
 :root {
   --bg-canvas: #000000;
+  --tui-bg-canvas: var(--bg-canvas);
   --bg-selection: #211915;
   --bg-highlight: #161314;
   --border-dim: #343044;
@@ -26,6 +27,10 @@
   --badge-bronze: #bd8954;
   --badge-silver: #c9c9ce;
   --badge-gold: #d5b85b;
+}
+
+:root[data-static-background] {
+  --tui-bg-canvas: #000000;
 }
 
 * {
@@ -86,7 +91,7 @@ textarea {
   min-height: min(700px, calc(100dvh - 220px));
   max-height: 100%;
   padding: 10px 12px 12px;
-  background: var(--bg-canvas);
+  background: var(--tui-bg-canvas);
   border: 1px solid #3d3d3d;
   border-radius: 8px;
   box-shadow: 0 22px 70px rgb(0 0 0 / 65%);
@@ -142,7 +147,7 @@ textarea {
 }
 
 .titlebar > span {
-  background: var(--bg-canvas);
+  background: var(--tui-bg-canvas);
 }
 
 .brand {
@@ -197,7 +202,7 @@ textarea {
   left: 10px;
   padding-inline: 5px;
   color: currentColor;
-  background: var(--bg-canvas);
+  background: var(--tui-bg-canvas);
   font-weight: 700;
   line-height: 18px;
   white-space: nowrap;
@@ -338,14 +343,14 @@ strong {
   padding: 16px 12px 8px;
   color: var(--border);
   overflow: visible;
-  background: var(--bg-canvas);
+  background: var(--tui-bg-canvas);
   z-index: 1;
 }
 
 .composer .block-title {
   left: 10px;
   padding-inline: 4px;
-  background: var(--bg-canvas);
+  background: var(--tui-bg-canvas);
 }
 
 .sidebar-pane {
@@ -362,7 +367,7 @@ strong {
   top: -10px;
   right: 10px;
   padding-inline: 5px;
-  background: var(--bg-canvas);
+  background: var(--tui-bg-canvas);
   text-align: right;
   font-weight: 800;
   line-height: 18px;
@@ -635,9 +640,29 @@ strong {
 
 .dialog-footer {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 12px;
   border-top: 1px solid #333333;
   border-bottom: 0;
+}
+
+.background-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: auto;
+  color: #d4d4d4;
+  font-size: 13px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.background-toggle input {
+  inline-size: 16px;
+  block-size: 16px;
+  margin: 0;
+  accent-color: #0e639c;
 }
 
 .export-preview {
@@ -692,7 +717,7 @@ strong {
 [data-token="badge_silver"] { color: var(--badge-silver); }
 [data-token="badge_gold"] { color: var(--badge-gold); }
 
-[data-token-bg="bg_canvas"] { background: var(--bg-canvas); }
+[data-token-bg="bg_canvas"] { background: var(--tui-bg-canvas); }
 [data-token-bg="bg_selection"] { background: var(--bg-selection); }
 [data-token-bg="bg_highlight"] { background: var(--bg-highlight); }
 
