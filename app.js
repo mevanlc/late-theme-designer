@@ -72,6 +72,10 @@ const exportButton = document.querySelector("#exportButton");
 const exportDialog = document.querySelector("#exportDialog");
 const copyButton = document.querySelector("#copyButton");
 const copyStatus = document.querySelector("#copyStatus");
+const designerShell = document.querySelector(".designer-shell");
+const themePanel = document.querySelector("#themePanel");
+const hideThemePanel = document.querySelector("#hideThemePanel");
+const showThemePanel = document.querySelector("#showThemePanel");
 
 function cssVarName(token) {
   return `--${token.replaceAll("_", "-")}`;
@@ -254,6 +258,18 @@ copyButton.addEventListener("click", async () => {
     document.execCommand("copy");
     copyStatus.textContent = "Copied";
   }
+});
+
+hideThemePanel.addEventListener("click", () => {
+  designerShell.classList.add("is-picker-collapsed");
+  themePanel.setAttribute("aria-hidden", "true");
+  showThemePanel.hidden = false;
+});
+
+showThemePanel.addEventListener("click", () => {
+  designerShell.classList.remove("is-picker-collapsed");
+  themePanel.removeAttribute("aria-hidden");
+  showThemePanel.hidden = true;
 });
 
 applyTheme();

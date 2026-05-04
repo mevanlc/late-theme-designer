@@ -8,6 +8,32 @@
   </head>
   <body>
     <main class="designer-shell">
+      <button id="showThemePanel" class="palette-restore" type="button" title="Show theme selector" hidden>🎨</button>
+
+      <aside id="themePanel" class="theme-panel" aria-labelledby="dialog-title">
+        <form class="dialog-surface theme-panel-surface">
+          <header class="dialog-header">
+            <div class="theme-panel-controls">
+              <button id="hideThemePanel" class="icon-button" type="button" title="Hide theme selector">‹</button>
+              <h1 id="dialog-title">Theme Components</h1>
+            </div>
+            <div class="preset-row">
+              <label class="preset-field">
+                <span>Preset</span>
+                <select id="presetSelect"></select>
+              </label>
+              <button id="resetButton" class="icon-button" type="button" title="Reset colors">↺</button>
+            </div>
+          </header>
+
+          <div id="tokenList" class="token-list"></div>
+
+          <footer class="dialog-footer">
+            <button id="exportButton" class="command-button" type="button">Export</button>
+          </footer>
+        </form>
+      </aside>
+
       <section class="terminal-stage" aria-label="late.sh dashboard mockup">
         <div class="terminal" data-token-bg="bg_canvas">
           <div class="frame" data-token="border_active">
@@ -226,10 +252,64 @@
                     </div>
                   </div>
 
-                  <div class="composer tui-block" data-token="border">
-                    <div class="block-title">Compose (press i)</div>
-                    <span data-token="text_dim">Type a message · j/k select · /binds · ask </span>
-                    <span data-token="mention">@bot</span>
+                  <div class="chat-bottom-dock">
+                    <div class="composer tui-block" data-token="border">
+                      <div class="block-title">Compose (press i)</div>
+                      <span data-token="text_dim">Type a message · j/k select · /binds · ask </span>
+                      <span data-token="mention">@bot</span>
+                    </div>
+
+                    <section class="tui-block bonsai bonsai-debug bonsai-debug-compact" data-token="border">
+                      <div class="block-title">Bonsai (A)</div>
+                      <pre><span data-token="bonsai_sprout">        , ,
+        |,|
+        \|/</span>
+<span data-token="bonsai_leaf">       ,.,.,
+        \|/</span>
+<span data-token="amber">         |
+         |
+        .|.</span>
+<span data-token="text_dim">       [===]</span></pre>
+                      <div><span data-token="bonsai_leaf">Watered today</span></div>
+                    </section>
+
+                    <section class="tui-block bonsai bonsai-debug" data-token="border">
+                      <div class="block-title">Bonsai (B)</div>
+                      <pre><span data-token="bonsai_canopy">      .@@@@@.
+    .@@@@@@@@@.
+   .@@@@@@@@@@@.
+    '@@|@|@@@'</span>
+<span data-token="amber">       | |
+       | |
+      /   \
+      |   |
+      |   |
+       \ /
+        V
+        |
+       .|.</span>
+<span data-token="text_dim">      [===]</span></pre>
+                      <div><span data-token="bonsai_leaf">Watered today</span></div>
+                    </section>
+
+                    <section class="tui-block bonsai bonsai-debug" data-token="border">
+                      <div class="block-title">Bonsai (C)</div>
+                      <pre><span data-token="bonsai_bloom">      .*@*@*@*.
+     *@@*@@*@@*.
+    .*@*@*@*@*@*.
+     '*@|@|@*@*'</span>
+<span data-token="amber">       | |
+       | |
+      /   \
+      |   |
+      |   |
+       \ /
+        V
+        |
+       .|.</span>
+<span data-token="text_dim">      [===]</span></pre>
+                      <div><span data-token="bonsai_leaf">Watered today</span></div>
+                    </section>
                   </div>
                 </section>
               </div>
@@ -275,7 +355,7 @@
 
                 <section class="tui-block bonsai" data-token="border">
                   <div class="block-title">Bonsai (9d)</div>
-                  <pre><span data-token="bonsai_canopy">       .*o*o*o*.
+                  <pre><span data-token="bonsai_bloom">       .*o*o*o*.
       *oo*oo*oo*.
      .*o*o*o*o*o*.
       '*o|o|o*o*'</span>
@@ -296,28 +376,8 @@
             </div>
           </div>
         </div>
+
       </section>
-
-      <dialog class="theme-dialog" open aria-labelledby="dialog-title">
-        <form method="dialog" class="dialog-surface">
-          <header class="dialog-header">
-            <div>
-              <h1 id="dialog-title">Theme Components</h1>
-              <label class="preset-field">
-                <span>Preset</span>
-                <select id="presetSelect"></select>
-              </label>
-            </div>
-            <button id="resetButton" class="icon-button" type="button" title="Reset colors">↺</button>
-          </header>
-
-          <div id="tokenList" class="token-list"></div>
-
-          <footer class="dialog-footer">
-            <button id="exportButton" class="command-button" type="button">Export</button>
-          </footer>
-        </form>
-      </dialog>
 
       <dialog id="exportDialog" class="export-dialog" aria-labelledby="export-title">
         <form method="dialog" class="export-surface">
@@ -332,7 +392,7 @@
           <textarea id="exportText" class="export-preview" spellcheck="false"></textarea>
 
           <footer class="export-actions">
-            <span id="copyStatus" data-token="text_dim"></span>
+            <span id="copyStatus"></span>
             <button id="copyButton" class="command-button" type="button">Copy</button>
           </footer>
         </form>
