@@ -449,6 +449,7 @@ strong {
 .theme-panel {
   min-width: 0;
   max-height: calc(100vh - 36px);
+  max-height: calc(100dvh - 36px);
   overflow: hidden;
   color: #cccccc;
   background: #1e1e1e;
@@ -467,7 +468,9 @@ strong {
 .theme-panel-surface {
   width: min(420px, calc(100vw - 36px));
   height: calc(100vh - 36px);
+  height: calc(100dvh - 36px);
   max-height: calc(100vh - 36px);
+  max-height: calc(100dvh - 36px);
 }
 
 .palette-restore {
@@ -511,6 +514,7 @@ strong {
 .export-surface {
   display: grid;
   grid-template-rows: auto minmax(0, 1fr) auto;
+  min-height: 0;
 }
 
 .dialog-header,
@@ -595,6 +599,7 @@ strong {
 }
 
 .token-list {
+  min-height: 0;
   overflow: auto;
   padding: 10px 12px;
 }
