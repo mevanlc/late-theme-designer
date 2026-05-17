@@ -31,240 +31,284 @@
           <footer class="dialog-footer">
             <label class="background-toggle">
               <input id="useBackgroundColor" type="checkbox" checked />
-              <span>Background Color</span>
+              <span>BG Color</span>
             </label>
+            <button id="importButton" class="command-button secondary" type="button">Import</button>
             <button id="exportButton" class="command-button" type="button">Export</button>
           </footer>
         </form>
       </aside>
 
-      <section class="terminal-stage" aria-label="late.sh dashboard mockup">
+      <section class="terminal-stage" aria-label="late.sh home mockup">
         <div class="terminal" data-token-bg="bg_canvas">
           <div class="frame" data-token="border_active">
             <div class="titlebar">
               <span class="brand" data-token="text_bright">late.sh</span>
               <span class="pipe" data-token="border_dim">|</span>
-              <span class="tab active" data-token="amber">1</span>
+              <span class="tab active">1</span>
               <span class="tab" data-token="text_dim">2</span>
               <span class="tab" data-token="text_dim">3</span>
               <span class="tab" data-token="text_dim">4</span>
-              <span class="tab" data-token="text_dim">5</span>
               <span class="pipe" data-token="border_dim">|</span>
-              <span class="page-title" data-token="text_muted">Dashboard</span>
+              <span class="page-title" data-token="text_muted">Home</span>
+              <span class="title-sep" data-token="text_dim">·</span>
+              <span class="room-title" data-token="text_bright">lounge</span>
+            </div>
+            <div class="titlebar-hud" data-token="mention">
+              <strong>1</strong><span data-token="text_muted"> unread mention</span>
+            </div>
+
+            <div class="frame-footer footer-help">
+              <span data-token="text_dim">Settings </span><strong data-token="amber_dim">Ctrl+O</strong>
+              <span data-token="text_faint"> · </span><span data-token="text_dim">Hub </span><strong data-token="amber_dim">Ctrl+G</strong>
+              <span data-token="text_faint"> · </span><span data-token="text_dim">FAQ </span><strong data-token="amber_dim">Ctrl+L</strong>
+              <span data-token="text_faint"> · </span><span data-token="text_dim">Guide </span><strong data-token="amber_dim">?</strong>
+            </div>
+            <div class="frame-footer footer-sponsor">
+              <span data-token="text_dim">thanks for hanging out </span><span data-token="amber">☕ </span><span data-token="amber_dim">https://ko-fi.com/mateuszpiorowski</span>
             </div>
 
             <div class="content-grid">
-              <div class="dashboard-pane">
-                <div class="top-grid">
-                  <section class="tui-block stream-card" data-token="border">
-                    <div class="block-title">Stream</div>
-                    <div class="stream-copy">
-                      <div class="muted" data-token="text_dim">Playing: <span data-token="amber">Ketsa - Shining Still</span></div>
-                      <div>
-                        <span data-token="text_dim">Vibe: </span><span class="key" data-token="amber">Lofi</span>
-                        <span data-token="text_dim"> Next: </span><span class="key" data-token="amber">Lofi</span>
-                        <span data-token="text_dim"> Switch in 18:53</span>
-                      </div>
-                      <div>
-                        <span data-token="text_dim">No audio? </span>
-                        <span class="key" data-token="amber_dim">B</span>
-                        <span data-token="text_faint"> CLI </span>
-                        <span class="key" data-token="amber_dim">P</span>
-                        <span data-token="text_faint"> web</span>
-                      </div>
-                    </div>
-                  </section>
+              <aside class="room-rail">
+                <div class="rail-section">
+                  <div class="rail-label" data-token="text_faint">favorites</div>
+                  <div class="rail-row">
+                    <span data-token="amber_dim">@</span>
+                    <span data-token="text">kirii.md</span>
+                    <span></span>
+                  </div>
+                  <div class="rail-row">
+                    <span data-token="amber_dim">@</span>
+                    <span data-token="text">mat</span>
+                    <span></span>
+                  </div>
+                  <div class="rail-row">
+                    <span data-token="amber_dim">@</span>
+                    <span data-token="text">wranglyph</span>
+                    <span></span>
+                  </div>
+                  <div class="rail-row">
+                    <span data-token="amber">▰</span>
+                    <span data-token="text">moderators</span>
+                    <span data-token="amber_dim">4</span>
+                  </div>
+                  <div class="rail-row">
+                    <span data-token="amber">▌</span>
+                    <strong data-token="amber">dev</strong>
+                    <span></span>
+                  </div>
+                  <div class="rail-row selected">
+                    <span data-token="amber">▌</span>
+                    <strong data-token="amber">lounge</strong>
+                    <span></span>
+                  </div>
+                </div>
 
-                  <section class="tui-block vote-card" data-token="border">
-                    <div class="block-title">Vote Next (L/A/C)</div>
-                    <div class="vote-line">
-                      <span class="key" data-token="amber">L</span>
-                      <span data-token="text">Lofi</span>
-                      <span class="bar fill" data-token="success">██████</span><span class="bar" data-token="border">░░░</span>
-                      <span data-token="text_dim"> 4 ✓</span>
+                <div class="rail-section">
+                  <div class="rail-label" data-token="text_faint">core</div>
+                  <div class="rail-row">
+                    <span></span>
+                    <span data-token="text">announcements</span>
+                    <span></span>
+                  </div>
+                  <div class="rail-row">
+                    <span></span>
+                    <span data-token="text">suggestions</span>
+                    <span></span>
+                  </div>
+                  <div class="rail-row">
+                    <span></span>
+                    <span data-token="text">bugs</span>
+                    <span data-token="amber_dim">13</span>
+                  </div>
+                  <div class="rail-row">
+                    <span></span>
+                    <span data-token="text">mentions</span>
+                    <span data-token="mention">1</span>
+                  </div>
+                </div>
+
+                <div class="rail-section">
+                  <div class="rail-label" data-token="text_faint">channels</div>
+                  <div class="rail-row"><span></span><span data-token="text">anime</span><span data-token="amber_dim">2</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">async</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">books</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">cat-noises</span><span data-token="amber_dim">5</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">coffee</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">confessions</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">gaming</span><span data-token="amber_dim">3</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">go</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">help</span><span data-token="amber_dim">22</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">international</span><span data-token="amber_dim">3</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">linux</span><span data-token="amber_dim">3</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">lisp</span><span data-token="amber_dim">2</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">mac</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">matrix</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">mosaic-os</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">movies</span><span data-token="amber_dim">1</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">music</span><span data-token="amber_dim">4</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">neovim</span><span data-token="amber_dim">32</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">programming</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">python</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">rust</span><span data-token="amber_dim">7</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">security</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">split-keyboards</span><span data-token="amber_dim">4</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">tech</span><span data-token="amber_dim">11</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">trees</span><span data-token="amber_dim">2</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">unixporn</span><span data-token="amber_dim">29</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">windows</span><span data-token="amber_dim">20</span></div>
+                </div>
+
+                <div class="rail-section">
+                  <div class="rail-label" data-token="text_faint">updates</div>
+                  <div class="rail-row"><span></span><span data-token="text">news</span><span data-token="amber_dim">5</span></div>
+                  <div class="rail-row"><span></span><span data-token="text">showcase</span><span></span></div>
+                  <div class="rail-row"><span></span><span data-token="text">work</span><span></span></div>
+                </div>
+
+                <div class="rail-section">
+                  <div class="rail-label" data-token="text_faint">voice</div>
+                </div>
+              </aside>
+
+              <div class="dashboard-pane">
+                <div class="home-strip">
+                  <section class="home-box online-box">
+                    <div class="inline-label">
+                      <span data-token="text_faint">online</span>
+                      <span data-token="success">●</span>
+                      <strong data-token="text_bright">18</strong>
+                      <span data-token="text_dim">here</span>
                     </div>
-                    <div class="vote-line">
-                      <span class="key" data-token="amber">A</span>
-                      <span data-token="text">Ambient</span>
-                      <span class="bar fill" data-token="amber_dim">███</span><span class="bar" data-token="border">░░░░░</span>
-                      <span data-token="text_dim"> 2</span>
-                    </div>
-                    <div class="vote-line">
-                      <span class="key" data-token="amber">C</span>
-                      <span data-token="text">Classic</span>
-                      <span class="bar fill" data-token="amber_dim">██</span><span class="bar" data-token="border">░░░░░░</span>
-                      <span data-token="text_dim"> 1</span>
-                    </div>
+                    <div><span data-token="text">@siR</span><span data-token="text_dim"> watered their bonsai</span><span data-token="text_faint"> 3m</span></div>
+                    <div><span data-token="text">@siR</span><span data-token="text_dim"> joined</span><span data-token="text_faint"> 4m</span></div>
+                    <div><span data-token="text">@mayube</span><span data-token="text_dim"> watered their bonsai</span><span data-token="text_faint"> 11m</span></div>
+                    <div><span data-token="text">@web-demo</span><span data-token="text_dim"> joined</span><span data-token="text_faint"> 12m</span></div>
+                  </section>
+                  <div class="vertical-rule" data-token="border_dim"></div>
+                  <section class="home-box">
+                    <div class="inline-label"><span data-token="text_faint">daily quest</span><span data-token="border_dim">(coming soon)</span></div>
+                    <strong data-token="text_bright">win 3 hands</strong>
+                    <span data-token="text_dim">any table</span>
+                    <div><span data-token="success">████████</span><span data-token="border_dim">░░░░░░░░░░░░░░░░</span><span data-token="text_dim"> 1/3</span></div>
+                  </section>
+                  <div class="vertical-rule" data-token="border_dim"></div>
+                  <section class="home-box">
+                    <div class="inline-label"><span data-token="text_faint">shop</span><span data-token="border_dim">(coming soon)</span></div>
+                    <strong data-token="text_bright">golden chips</strong>
+                    <span data-token="text_dim">new this week</span>
+                    <div><span data-token="amber">● 200</span><span data-token="text_faint"> to buy</span></div>
                   </section>
                 </div>
 
-                <section class="blackjack-strip">
-                  <div class="strip-grid">
-                    <div class="strip-slot">
-                      <div>
-                        <span class="dim" data-token="amber_dim">○○○○ 0/4</span>
-                        <span class="bright" data-token="amber"> Blackjack Table [b1]</span>
-                        <span class="slot-key" data-token="amber">[b+1]</span>
-                      </div>
-                      <div><span data-token="amber">Quick</span><span data-token="text_dim"> · 10 chips · betting</span></div>
-                    </div>
-                    <div class="strip-slot">
-                      <div>
-                        <span class="dim" data-token="amber_dim">○○○○ 2/4</span>
-                        <span class="bright" data-token="amber"> Blackjack Table [b2]</span>
-                        <span class="slot-key" data-token="amber">[b+2]</span>
-                      </div>
-                      <div><span data-token="amber">Standard</span><span data-token="text_dim"> · 10 chips · idle</span></div>
-                    </div>
-                    <div class="strip-slot">
-                      <div>
-                        <span class="dim" data-token="amber_dim">○○○○ ?/4</span>
-                        <span class="label" data-token="amber"> Blackjack Table [b3]</span>
-                        <span class="slot-key" data-token="amber">[b+3]</span>
-                      </div>
-                      <div><span data-token="amber">Quick</span><span data-token="text_dim"> · 10 chips · idle</span></div>
-                    </div>
+                <section class="wire-strip">
+                  <div class="wire-rule">
+                    <span data-token="border_dim">── </span><span data-token="text_dim">the wire</span><span class="wire-fill"></span>
                   </div>
+                  <strong data-token="text">SQL: Incorrect by Construction</strong>
+                  <div data-token="text_dim">• Argues that SQL and relational databases make it easy to introduce serious concurrency bugs.</div>
+                  <div data-token="text_dim">• Uses standard TSQL money-transfer procedures to demonstrate seemingly reasonable queries require complex locks.</div>
+                  <div data-token="text_dim">• Proposes an alternative database language inspired by Rust's fearless concurrency.</div>
+                  <div class="wire-bottom"></div>
                 </section>
 
+                <div class="pinned-row">
+                  <span data-token="amber">●</span>
+                  <span data-token="text">Breaking Changes for the CLI - please update! :) - curl -fsSL https://cli.late.sh/install.sh | bash (or press P)</span>
+                </div>
+
                 <section class="chat-card">
-                  <div class="chat-log">
-                    <div class="message">
-                      <span class="body" data-token="chat_body">then click :D</span>
-                    </div>
-                    <div class="message">
-                      <span class="body" data-token="chat_body">try it</span>
+	                  <div class="chat-log">
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kyllingene</span>
+                        <span data-token="text_faint">· [55 mins ago]</span>
+                      </div>
+                      <div><span class="quote" data-token="amber_dim">&gt;&gt; @dcutes: lol what distro</span></div>
+                      <div class="body" data-token="chat_body">&gt;arch, but it's my broken pc's fault</div>
                     </div>
                     <div class="message grouped">
                       <div class="meta">
-                        <span class="author" data-token="chat_author">mat</span>
+                        <span class="author" data-token="chat_author">dcutes</span>
+                        <span data-token="text_faint">· [55 mins ago]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">oof just reinstall everything then</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kyllingene</span>
+                        <span data-token="text_faint">· [55 mins ago]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">literally 10 years old</div>
+                      <div class="body" data-token="chat_body">[🤔 1]</div>
+                      <div><span class="quote" data-token="amber_dim">&gt; @dcutes: oof just reinstall everything then</span></div>
+                      <div class="body" data-token="chat_body">yeah, reinstalling normally didn't work so about to try again, then uninstall-reinstall</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">dcutes</span>
+                        <span data-token="text_faint">· [54 mins ago]</span>
+                      </div>
+                      <div><span class="quote" data-token="amber_dim">&gt; @kyllingene: yeah, reinstalling normally didn't work so about...</span></div>
+                      <div class="body" data-token="chat_body">bruh</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kyllingene</span>
+                        <span data-token="text_faint">· [52 mins ago]</span>
+                      </div>
+                      <div class="body" data-token="chat_body">trouble is one of the packages is the kernel, sooo</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">Gummy.tui</span>
+                        <span class="badge" data-token="badge_silver">⚘</span>
+                        <span data-token="text_faint">[50 mins ago]</span>
+                      </div>
+                      <div><span class="quote" data-token="amber_dim">&gt; @kirii.md: Kirii REVAMP, Amoled Collection, readjusted Cont...</span></div>
+                      <div class="body" data-token="chat_body">Ohhh</div>
+                    </div>
+                    <div class="message grouped">
+                      <div class="meta">
+                        <span class="author" data-token="chat_author">kirii.md</span>
                         <span class="badge" data-token="badge_gold">✿</span>
-                        <span data-token="text_faint">[5 mins ago]</span>
+                        <span data-token="text_faint">[50 mins ago]</span>
                       </div>
-                      <div class="body" data-token="chat_body">ok, bouncing, have a great time everyone :)</div>
+                      <div><span class="quote" data-token="amber_dim">&gt; @Gummy.tui: Ohhh</span></div>
+                      <div class="body" data-token="chat_body">:D</div>
+                      <div class="body" data-token="chat_body">total theme this time: 10+</div>
                     </div>
                     <div class="message grouped">
                       <div class="meta">
-                        <span class="author" data-token="chat_author">kirii.md</span>
-                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
-                        <span data-token="text_faint">[4 mins ago]</span>
+                        <span class="author" data-token="chat_author">Gummy.tui</span>
+                        <span class="badge" data-token="badge_silver">⚘</span>
+                        <span data-token="text_faint">[46 mins ago]</span>
                       </div>
-                      <div>
-                        <span class="quote" data-token="amber_dim">&gt; @mat: ok, bouncing, have a great time everyone :)</span>
-                      </div>
-                      <div class="body" data-token="chat_body">hav a nice day mat :D</div>
+                      <div><span class="quote" data-token="amber_dim">&gt; @kirii.md: total theme this time: 10+</span></div>
+                      <div class="body" data-token="chat_body">woaw</div>
+                      <div class="body" data-token="chat_body">[🧡 1]</div>
                     </div>
                     <div class="message grouped">
                       <div class="meta">
-                        <span class="author" data-token="chat_author">wranglyph-2</span>
-                        <span data-token="text_faint">· [3 mins ago]</span>
+                        <span class="author" data-token="chat_author">niles</span>
+                        <span data-token="text_faint">· [45 mins ago]</span>
                       </div>
-                      <div>
-                        <span class="quote" data-token="amber_dim">&gt; @kirii.md: if you're using kitty</span>
-                      </div>
-                      <div class="body" data-token="chat_body">pretty sure I'm using gnome, actually, but I'll check out kitty one of these days.</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">kirii.md</span>
-                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
-                        <span data-token="text_faint">[2 mins ago]</span>
-                      </div>
-                      <div>
-                        <span class="quote" data-token="amber_dim">&gt; @wranglyph-2: pretty sure I'm using gnome, actually, but I'll...</span>
-                      </div>
-                      <div class="body" data-token="chat_body">ohhh.... I think u can ?</div>
-                      <div class="body" data-token="chat_body">I don't don't gnome that much</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">graybeard</span>
-                        <span data-token="text_faint">· [2 mins ago]</span>
-                      </div>
-                      <div class="body" data-token="chat_body">the stream switcher is behaving now. classic fades in without popping.</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author bot" data-token="bot">dealer</span>
-                        <span data-token="text_faint">· [1 min ago]</span>
-                      </div>
-                      <div class="body" data-token="chat_body">blackjack table b2 is waiting for bets.</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">nora</span>
-                        <span class="badge" data-token="badge_silver">◇</span>
-                        <span data-token="text_faint">[1 min ago]</span>
-                      </div>
-                      <div>
-                        <span class="quote" data-token="amber_dim">&gt; @graybeard: classic fades in without popping.</span>
-                      </div>
-                      <div class="body" data-token="chat_body">that transition is so much nicer. tiny polish, big relief.</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">mevanlc</span>
-                        <span class="badge" data-token="badge_gold">⌁ ✿</span>
-                        <span data-token="text_faint">[just now]</span>
-                      </div>
-                      <div class="body" data-token="chat_body">I'm going to make u a theme designer webpage</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">wranglyph-2</span>
-                        <span data-token="text_faint">· [just now]</span>
-                      </div>
-                      <div>
-                        <span class="quote" data-token="amber_dim">&gt; @kirii.md: I think u can ?</span>
-                      </div>
-                      <div class="body" data-token="chat_body">ok so it turns out that it's already set to ctrl c, but it doesn't work in here because you can't highlight the text</div>
+                      <div><span class="quote" data-token="amber_dim">&gt; @kyllingene: yeah, reinstalling normally didn't work so about...</span></div>
+                      <div class="body" data-token="chat_body">dude... i ran out of storage while running pacman -Syu and bricked my laptop and had to reinstall, i do not recommend</div>
                     </div>
                     <div class="message grouped selected" data-token-bg="bg_selection">
                       <div class="meta">
                         <span class="selector" data-token="amber">▸</span>
-                        <span class="author" data-token="chat_author">kirii.md</span>
-                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
-                        <span data-token="text_faint">[just now]</span>
+                        <span class="author bot" data-token="bot">bot</span>
+                        <span data-token="text_faint">[44 mins ago]</span>
                       </div>
-                      <div>
-                        <span class="quote" data-token="amber_dim">&gt; @mevanlc: I'm going to make u a theme designer webpage</span>
-                      </div>
-                      <div class="body" data-token="chat_body">HA??? RLLY!?!??!</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">kirii.md</span>
-                        <span class="badge" data-token="badge_gold">🎨 ✿</span>
-                        <span data-token="text_faint">[just now]</span>
-                      </div>
-                      <div class="body shout" data-token="chat_body">WOULD BE SO NICE SO I DON'T HAVE TO GUESS AND RELOAD THE APP</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author" data-token="chat_author">mevanlc</span>
-                        <span class="badge" data-token="badge_gold">⌁ ✿</span>
-                        <span data-token="text_faint">[just now]</span>
-                      </div>
-                      <div class="body" data-token="chat_body">first pass will be webpage, live preview, and export. then we can hook it to actual palette files.</div>
-                    </div>
-                    <div class="message grouped">
-                      <div class="meta">
-                        <span class="author bot" data-token="bot">@bot</span>
-                        <span data-token="text_faint">· [just now]</span>
-                      </div>
-                      <div class="body" data-token="chat_body">palette draft saved locally. no reload required.</div>
+                      <div class="body" data-token="chat_body">themes imported into the designer preview. current palette has 27 color slots.</div>
                     </div>
                   </div>
 
-                  <div class="chat-bottom-dock">
-                    <div class="composer tui-block" data-token="border">
-                      <div class="block-title">Compose (press i)</div>
-                      <span data-token="text_dim">Type a message · j/k select · /binds · ask </span>
-                      <span data-token="mention">@bot</span>
-                    </div>
-
-                    <section class="tui-block bonsai bonsai-debug bonsai-debug-compact" data-token="border">
-                      <div class="block-title">Bonsai (A)</div>
+                  <div class="bonsai-preview-dock" aria-label="bonsai color previews">
+                    <section class="tui-block bonsai-preview" data-token="border">
+                      <div class="block-title">Sprout</div>
                       <pre><span data-token="bonsai_sprout">        , ,
         |,|
         \|/</span>
@@ -273,115 +317,133 @@
 <span data-token="amber">         |
          |
         .|.</span>
-<span data-token="text_dim">       [===]</span></pre>
-                      <div><span data-token="bonsai_leaf">Watered today</span></div>
+<span data-token="badge_bronze">       [===]</span></pre>
+                      <div><span data-token="bonsai_sprout">7d</span><span data-token="text_faint"> · young growth</span></div>
                     </section>
 
-                    <section class="tui-block bonsai bonsai-debug" data-token="border">
-                      <div class="block-title">Bonsai (B)</div>
+                    <section class="tui-block bonsai-preview" data-token="border">
+                      <div class="block-title">Canopy</div>
                       <pre><span data-token="bonsai_canopy">      .@@@@@.
     .@@@@@@@@@.
    .@@@@@@@@@@@.
     '@@|@|@@@'</span>
+<span data-token="bonsai_leaf">       .|.|.
+      .|.|.</span>
 <span data-token="amber">       | |
-       | |
       /   \
-      |   |
-      |   |
        \ /
-        V
         |
        .|.</span>
-<span data-token="text_dim">      [===]</span></pre>
-                      <div><span data-token="bonsai_leaf">Watered today</span></div>
+<span data-token="badge_bronze">      [===]</span></pre>
+                      <div><span data-token="bonsai_canopy">16d</span><span data-token="text_faint"> · full canopy</span></div>
                     </section>
+                  </div>
 
-                    <section class="tui-block bonsai bonsai-debug" data-token="border">
-                      <div class="block-title">Bonsai (C)</div>
-                      <pre><span data-token="bonsai_bloom">      .*@*@*@*.
-     *@@*@@*@@*.
-    .*@*@*@*@*@*.
-     '*@|@|@*@*'</span>
-<span data-token="amber">       | |
-       | |
-      /   \
-      |   |
-      |   |
-       \ /
-        V
-        |
-       .|.</span>
-<span data-token="text_dim">      [===]</span></pre>
-                      <div><span data-token="bonsai_leaf">Watered today</span></div>
-                    </section>
+                  <div class="composer tui-block" data-token="border">
+                      <div class="block-title">── Compose (press i)</div>
+                      <span data-token="text_dim">f react · r reply · e edit · d delete · p profile · c copy · Enter jump to reply</span>
                   </div>
                 </section>
               </div>
 
               <aside class="sidebar-pane">
-                <div class="mentions" data-token="mention">1 unread mention</div>
-                <section class="tui-block mini" data-token="border">
-                  <div class="block-title">Time</div>
-                  <span data-token="amber_dim">◷</span>
-                  <span data-token="text_dim">Sun</span>
-                  <strong data-token="amber">16:00</strong>
-                </section>
+                <div class="sidebar-rule"></div>
+                <div class="sidebar-content">
+                  <section class="sidebar-time">
+                    <span data-token="amber_dim">⊙ </span><strong data-token="amber">21:28</strong><span data-token="text_faint"> Sat</span>
+                  </section>
+                  <div class="horizontal-rule" data-token="border_dim"></div>
 
-                <section class="tui-block visualizer" data-token="border_active">
-                  <div class="block-title">Visualizer</div>
-                  <div class="viz-bars" data-token="amber">
-                    <span style="height: 62%"></span>
-                    <span style="height: 34%"></span>
-                    <span style="height: 80%"></span>
-                    <span style="height: 48%"></span>
-                    <span style="height: 72%"></span>
-                    <span style="height: 24%"></span>
-                    <span style="height: 58%"></span>
-                  </div>
-                </section>
+                  <section class="audio-pairing">
+                    <div data-token="text_dim">no audio paired</div>
+                    <div><strong data-token="amber_dim">/music</strong><span data-token="text_dim"> in chat</span></div>
+                    <div class="sidebar-spacer"></div>
+                    <div><strong data-token="amber">P</strong><span data-token="text_dim"> install · pair</span></div>
+                  </section>
+                  <div class="horizontal-rule" data-token="border_dim"></div>
 
-                <section class="tui-block now-playing" data-token="border">
-                  <div class="block-title">Now Playing</div>
-                  <div data-token="text_dim">Yawner</div>
-                  <div data-token="text_bright">Midnight static</div>
-                  <div><span data-token="amber">2:14</span> <span data-token="border_dim">────●────</span></div>
-                  <div data-token="text_faint">No pair</div>
-                </section>
+                  <section class="now-playing">
+                    <strong data-token="text_bright">String Quartet No. 6...</strong>
+                    <div data-token="text_dim">Ludwig van Beethoven</div>
+                    <div><span data-token="amber">4:25</span> <span data-token="border_dim">────────</span><span data-token="amber_glow">●</span> <span data-token="text_faint">4:41</span></div>
+                    <div data-token="text_faint">no pair</div>
+                    <div><strong data-token="amber_dim">-/=</strong><span data-token="text_faint"> vol  </span><strong data-token="amber_dim">m</strong><span data-token="text_faint"> mute</span></div>
+                    <div><span data-token="success">classic</span><span data-token="text_faint"> &gt; </span><span data-token="amber">classic</span><span data-token="text_faint"> · </span><span data-token="amber_dim">1</span></div>
+                    <div class="vote-inline">
+                      <div><span data-token="text">lofi</span><span data-token="border_dim"> ........ </span><span data-token="text_dim">0 </span><strong data-token="amber">v1</strong></div>
+                      <div><span data-token="text">ambient</span><span data-token="border_dim"> ..... </span><span data-token="text_dim">0 </span><strong data-token="amber">v2</strong></div>
+                      <div><span data-token="text">classic</span><span data-token="border_dim"> ..... </span><span data-token="text_dim">0 </span><strong data-token="amber">v3</strong></div>
+                    </div>
+                  </section>
+                  <div class="horizontal-rule" data-token="border_dim"></div>
 
-                <section class="tui-block activity" data-token="border">
-                  <div class="block-title">Activity</div>
-                  <div><span data-token="success">●</span> <strong data-token="amber">18</strong> <span data-token="text_dim">online</span></div>
-                  <div data-token="text_muted">@graybeard  12s</div>
-                  <div data-token="text_dim">joined blackjack</div>
-                  <div data-token="text_muted">@nora  1m</div>
-                  <div data-token="text_dim">sent a message</div>
-                </section>
+                  <section class="active-tables">
+                    <div>
+                      <strong data-token="text_bright">Poker Table</strong>
+                      <strong class="room-hint" data-token="amber_dim">b1</strong>
+                    </div>
+                    <div><span data-token="amber">○○○○</span><span data-token="text_dim"> 45s timer</span></div>
+                    <div>
+                      <strong data-token="text_bright">Blackjack Table</strong>
+                      <strong class="room-hint" data-token="amber_dim">b2</strong>
+                    </div>
+                    <div><span data-token="amber">○○○○</span><span data-token="text_dim"> 5m timer</span></div>
+                    <div>
+                      <strong data-token="text_bright">Blackjack Table</strong>
+                      <strong class="room-hint" data-token="amber_dim">b3</strong>
+                    </div>
+                    <div><span data-token="amber">○○○○</span><span data-token="text_dim"> 5m timer</span></div>
+                  </section>
+                  <div class="horizontal-rule" data-token="border_dim"></div>
 
-                <section class="tui-block bonsai" data-token="border">
-                  <div class="block-title">Bonsai (9d)</div>
-                  <pre><span data-token="bonsai_bloom">       .*o*o*o*.
-      *oo*oo*oo*.
-     .*o*o*o*o*o*.
-      '*o|o|o*o*'</span>
-<span data-token="amber">         | |
-         | |
-        /   \
-        |   |
-        |   |
-        |   |
-         \ /
-          V
+                  <section class="bonsai">
+                    <pre><span data-token="bonsai_bloom">
+        .*o*.
+       *oo*oo*
+        '*o'</span>
+<span data-token="amber">          |
+  </span><span data-token="bonsai_bloom">.*o*.   </span><span data-token="amber">|</span><span data-token="bonsai_bloom">   .*o*.
+ *oo*oo*</span><span data-token="amber">_ | _</span><span data-token="bonsai_bloom">*oo*oo*
+  'o*'  </span><span data-token="amber">\ | /</span><span data-token="bonsai_bloom">  'o*'</span>
+<span data-token="amber">         \|/
           |
-         .|.</span>
-<span data-token="text_dim">        [===]</span></pre>
-                  <div><span data-token="bonsai_leaf">Watered today</span></div>
-                </section>
+       .*o|o*.
+       *o*|*o*
+        '*|*'
+          |
+      _/ .|. \_</span>
+<span data-token="badge_bronze">     [=======]</span></pre>
+                    <div><span data-token="text_faint">23d </span><span data-token="amber">w</span><span data-token="text_faint"> water</span></div>
+                  </section>
+                </div>
               </aside>
             </div>
           </div>
         </div>
 
       </section>
+
+      <dialog id="importDialog" class="export-dialog" aria-labelledby="import-title">
+        <form method="dialog" class="export-surface">
+          <header class="dialog-header">
+            <div>
+              <h1 id="import-title">Import Palette</h1>
+              <p>Paste palette data</p>
+            </div>
+            <button class="icon-button" value="cancel" title="Close">×</button>
+          </header>
+
+          <textarea id="importText" class="export-preview" spellcheck="false" placeholder="Palette {
+  bg_canvas: Color::Rgb(0, 0, 0),
+  amber: #f1a55f
+}"></textarea>
+
+          <footer class="export-actions">
+            <span id="importStatus"></span>
+            <button id="applyImportButton" class="command-button" type="button">Apply</button>
+          </footer>
+        </form>
+      </dialog>
 
       <dialog id="exportDialog" class="export-dialog" aria-labelledby="export-title">
         <form method="dialog" class="export-surface">

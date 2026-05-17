@@ -1,32 +1,89 @@
 const tokens = [
   ["bg_canvas", "terminal canvas"],
-  ["bg_selection", "selected rows and active tab fg"],
-  ["bg_highlight", "raised/secondary surface"],
-  ["border_dim", "rules and separators"],
-  ["border", "normal panel border"],
-  ["border_active", "outer frame and active panels"],
-  ["text_faint", "timestamps and disabled text"],
+  ["bg_selection", "active row/tab fg"],
+  ["bg_highlight", "secondary surface"],
+  ["border_dim", "rules/separators"],
+  ["border", "panel border"],
+  ["border_active", "frame/act panels"],
+  ["text_faint", "time/disabled txt"],
   ["text_dim", "secondary copy"],
-  ["text_muted", "dashboard title and quiet labels"],
+  ["text_muted", "dashbrd/quiet txt"],
   ["text", "general text"],
   ["text_bright", "strong text"],
-  ["amber", "keys, accents, progress"],
-  ["amber_dim", "quotes and subdued accents"],
-  ["amber_glow", "hot accent highlight"],
-  ["chat_body", "chat message body"],
-  ["chat_author", "chat author names"],
-  ["mention", "mentions and mention count"],
-  ["success", "online/positive state"],
-  ["error", "error banners"],
+  ["amber", "keys/acc/progress"],
+  ["amber_dim", "quotes/sub accents"],
+  ["amber_glow", "hot accent"],
+  ["chat_body", "chat body"],
+  ["chat_author", "chat authors"],
+  ["mention", "mentions/count"],
+  ["success", "online/positive"],
+  ["error", "errors"],
   ["bot", "bot author"],
-  ["bonsai_sprout", "new bonsai growth"],
-  ["bonsai_leaf", "bonsai leaves/status"],
+  ["bonsai_sprout", "bonsai sprout"],
+  ["bonsai_leaf", "bonsai leaves"],
   ["bonsai_canopy", "bonsai canopy"],
-  ["bonsai_bloom", "bonsai blossoms"],
+  ["bonsai_bloom", "bonsai blooms"],
   ["badge_bronze", "bronze badge"],
   ["badge_silver", "silver badge"],
   ["badge_gold", "gold badge"],
 ];
+
+const tokenDetails = {
+  bg_canvas:
+    "Terminal canvas and modal background. Also used as inverse foreground for cursor-like highlights.",
+  bg_selection:
+    "Selected chat rows, focused modal rows, active tab inverse text, and selected list backgrounds.",
+  bg_highlight:
+    "Raised or secondary surfaces, especially highlighted leaderboard and puzzle cells.",
+  border_dim:
+    "Quiet dividers, inactive separators, card grid lines, and low-emphasis game borders.",
+  border:
+    "Default panel, card, modal, composer, news, showcase, and hub border color.",
+  border_active:
+    "Focused outer frames, active modals, current room/chat panels, and primary active borders.",
+  text_faint:
+    "Timestamps, disabled states, inactive room/list items, and very low-emphasis metadata.",
+  text_dim:
+    "Secondary labels, helper text, placeholders, command hints, and muted side copy.",
+  text_muted:
+    "Quiet headings and low-contrast title text, including arcade/puzzle secondary labels.",
+  text:
+    "Normal readable UI text, chat-adjacent copy, composer input, and list body text.",
+  text_bright:
+    "Strong labels, selected item text, game titles, headings, and active row emphasis.",
+  amber:
+    "Primary accent for keys, active markers, command letters, progress, chips, and links.",
+  amber_dim:
+    "Subdued accent for quotes, key hints, separators, table ids, and lower-priority highlights.",
+  amber_glow:
+    "Hot accent for modal titles, focus glints, leaderboard medals, and active search markers.",
+  chat_body:
+    "Main message text in chat, room transcripts, and chat-like event body copy.",
+  chat_author:
+    "Human author names in chat rows and message history.",
+  mention:
+    "Mention indicators, unread mention counts, and mention-side markers.",
+  success:
+    "Online status, positive states, balances, wins, ready states, and success feedback.",
+  error:
+    "Validation errors, failure banners, blocked actions, and destructive warning text.",
+  bot:
+    "Bot/system author names in chat rows.",
+  bonsai_sprout:
+    "Young bonsai growth, sprouts, and early-stage tree details.",
+  bonsai_leaf:
+    "Bonsai leaves plus watered/healthy status text.",
+  bonsai_canopy:
+    "Dense bonsai canopy shapes and mature tree foliage.",
+  bonsai_bloom:
+    "Bonsai blossoms, flowers, and decorative bloom highlights.",
+  badge_bronze:
+    "Bronze profile badges, lower-tier medals, and bronze reward accents.",
+  badge_silver:
+    "Silver profile badges, mid-tier medals, and silver reward accents.",
+  badge_gold:
+    "Gold profile badges, top-tier medals, and gold reward accents.",
+};
 
 const fallbackTheme = {
   bg_canvas: "#000000",
@@ -68,6 +125,11 @@ const tokenList = document.querySelector("#tokenList");
 const exportText = document.querySelector("#exportText");
 const resetButton = document.querySelector("#resetButton");
 const presetSelect = document.querySelector("#presetSelect");
+const importButton = document.querySelector("#importButton");
+const importDialog = document.querySelector("#importDialog");
+const importText = document.querySelector("#importText");
+const applyImportButton = document.querySelector("#applyImportButton");
+const importStatus = document.querySelector("#importStatus");
 const exportButton = document.querySelector("#exportButton");
 const exportDialog = document.querySelector("#exportDialog");
 const copyButton = document.querySelector("#copyButton");
@@ -93,6 +155,82 @@ function normalizeHex(value) {
   return null;
 }
 
+function escapeRegExp(value) {
+  return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
+
+function rgbChannel(value) {
+  const channel = Number.parseInt(value, 10);
+  if (!Number.isInteger(channel) || channel < 0 || channel > 255) {
+    return null;
+  }
+  return channel.toString(16).padStart(2, "0");
+}
+
+function rgbToHexValue(red, green, blue) {
+  const channels = [red, green, blue].map(rgbChannel);
+  if (channels.some((channel) => channel === null)) {
+    return null;
+  }
+  return `#${channels.join("")}`;
+}
+
+function colorFromText(value) {
+  const rgb = value.match(
+    /(?:color::)?rgb\s*\(\s*(\d{1,3})\s*,\s*(\d{1,3})\s*,\s*(\d{1,3})\s*\)/i,
+  );
+  if (rgb) {
+    return rgbToHexValue(rgb[1], rgb[2], rgb[3]);
+  }
+
+  const hex = value.match(/#?([0-9a-f]{6})\b/i);
+  return hex ? normalizeHex(hex[1]) : null;
+}
+
+function parseImportText(value) {
+  const parsed = {};
+  const seen = new Set();
+  const tokenNames = tokens.map(([token]) => token);
+
+  for (const line of value.split(/\r?\n/)) {
+    for (const token of tokenNames) {
+      if (seen.has(token)) {
+        continue;
+      }
+      const tokenPattern = new RegExp(`(^|[^A-Za-z0-9_])${escapeRegExp(token)}(?![A-Za-z0-9_])`);
+      if (!tokenPattern.test(line)) {
+        continue;
+      }
+      const color = colorFromText(line);
+      if (color) {
+        parsed[token] = color;
+        seen.add(token);
+      }
+    }
+  }
+
+  for (const token of tokenNames) {
+    if (seen.has(token)) {
+      continue;
+    }
+    const tokenPattern = new RegExp(
+      `(^|[^A-Za-z0-9_])${escapeRegExp(token)}(?![A-Za-z0-9_])`,
+      "g",
+    );
+    let match;
+    while ((match = tokenPattern.exec(value)) !== null) {
+      const color = colorFromText(value.slice(match.index, match.index + 160));
+      if (color) {
+        parsed[token] = color;
+        seen.add(token);
+        break;
+      }
+    }
+  }
+
+  return parsed;
+}
+
 function setToken(token, value) {
   const hex = normalizeHex(value);
   if (!hex) {
@@ -116,8 +254,15 @@ function syncInputs(token, value) {
 function renderTokenRows() {
   tokenList.replaceChildren(
     ...tokens.map(([token, desc]) => {
-      const row = document.createElement("label");
+      const row = document.createElement("div");
       row.className = "token-row";
+
+      const info = document.createElement("button");
+      info.type = "button";
+      info.className = "token-info";
+      info.textContent = "i";
+      info.dataset.tooltip = tokenDetails[token];
+      info.setAttribute("aria-label", `${token}: ${tokenDetails[token]}`);
 
       const name = document.createElement("span");
       name.className = "token-name";
@@ -148,7 +293,7 @@ function renderTokenRows() {
         }
       });
 
-      row.append(name, color, hex);
+      row.append(info, name, color, hex);
       return row;
     }),
   );
@@ -164,10 +309,14 @@ function groupLabel(group) {
     MARATHON: "MARATHON",
     JoelG: "Joel G",
     Experimental: "Experimental",
-    SocialDark: "Social Dark",
-    SocialLight: "Social Light",
+    SocialDark: "Social [Dark]",
+    SocialLight: "Social [Light]",
     Tea: "Tea",
     Crt: "CRT",
+    Seasons: "4 Seasons",
+    Games: "Games",
+    Monochrome: "Monochrome",
+    Amoled: "AMOLED",
   }[group] || group;
 }
 
@@ -251,6 +400,24 @@ if (presetSelect) {
     }
   });
 }
+
+importButton.addEventListener("click", () => {
+  importStatus.textContent = "";
+  importDialog.showModal();
+  importText.focus();
+  importText.select();
+});
+
+applyImportButton.addEventListener("click", () => {
+  const imported = parseImportText(importText.value);
+  const count = Object.keys(imported).length;
+  if (count === 0) {
+    importStatus.textContent = "No known colors found";
+    return;
+  }
+  loadTheme({ ...theme, ...imported });
+  importStatus.textContent = `Imported ${count} color${count === 1 ? "" : "s"}`;
+});
 
 exportButton.addEventListener("click", () => {
   renderExport();
