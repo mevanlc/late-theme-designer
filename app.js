@@ -19,10 +19,10 @@ const tokens = [
   ["success", "online/positive"],
   ["error", "errors"],
   ["bot", "bot author"],
-  ["bonsai_sprout", "bonsai sprout"],
-  ["bonsai_leaf", "bonsai leaves"],
-  ["bonsai_canopy", "bonsai canopy"],
-  ["bonsai_bloom", "bonsai blooms"],
+  ["bonsai_sprout", "sprout foliage"],
+  ["bonsai_leaf", "sapling foliage"],
+  ["bonsai_canopy", "young/mature foliage"],
+  ["bonsai_bloom", "ancient/blossom foliage"],
   ["badge_bronze", "bronze badge"],
   ["badge_silver", "silver badge"],
   ["badge_gold", "gold badge"],
@@ -54,7 +54,7 @@ const tokenDetails = {
   amber:
     "Primary accent for keys, active markers, command letters, progress, chips, and links.",
   amber_dim:
-    "Subdued accent for quotes, key hints, separators, table ids, and lower-priority highlights.",
+    "Subdued accent for quotes, key hints, separators, table ids, wilted bonsai foliage, and lower-priority highlights.",
   amber_glow:
     "Hot accent for modal titles, focus glints, leaderboard medals, and active search markers.",
   chat_body:
@@ -70,13 +70,13 @@ const tokenDetails = {
   bot:
     "Bot/system author names in chat rows.",
   bonsai_sprout:
-    "Young bonsai growth, sprouts, and early-stage tree details.",
+    "Sprout-stage bonsai foliage for trees at 100-199 growth points.",
   bonsai_leaf:
-    "Bonsai leaves plus watered/healthy status text.",
+    "Sapling-stage bonsai foliage for trees at 200-299 growth points.",
   bonsai_canopy:
-    "Dense bonsai canopy shapes and mature tree foliage.",
+    "Young and mature bonsai foliage for trees at 300-499 growth points.",
   bonsai_bloom:
-    "Bonsai blossoms, flowers, and decorative bloom highlights.",
+    "Ancient and blossom bonsai foliage for trees at 500+ growth points.",
   badge_bronze:
     "Bronze profile badges, lower-tier medals, and bronze reward accents.",
   badge_silver:
@@ -144,6 +144,7 @@ const preview = document.querySelector(".terminal");
 const hoverInfo = document.createElement("div");
 
 let isolatedToken = null;
+let currentHoverTokenInfo = null;
 
 function cssVarName(token) {
   return `--${token.replaceAll("_", "-")}`;
@@ -299,7 +300,7 @@ function closestPreviewElement(target, selector) {
   return element && preview.contains(element) ? element : null;
 }
 
-function hoverTokens(target) {
+function hoverTokenInfo(target) {
   const foreground = closestPreviewElement(target, "[data-token]")?.dataset.token;
   const background =
     closestPreviewElement(target, "[data-token-bg]")?.dataset.tokenBg ||
@@ -318,9 +319,12 @@ function hoverTokens(target) {
       ].filter(Boolean)
     : [];
 
-  return [tokenSummary("FG", foreground), tokenSummary("BG", background), ...borderTokens].filter(
-    Boolean,
-  );
+  return {
+    foreground,
+    rows: [tokenSummary("FG", foreground), tokenSummary("BG", background), ...borderTokens].filter(
+      Boolean,
+    ),
+  };
 }
 
 function positionHoverInfo(event) {
@@ -333,6 +337,7 @@ function positionHoverInfo(event) {
 }
 
 function hideHoverInfo() {
+  currentHoverTokenInfo = null;
   hoverInfo.hidden = true;
 }
 
@@ -342,12 +347,14 @@ function showHoverInfo(event) {
     return;
   }
 
-  const rows = hoverTokens(event.target);
+  const info = hoverTokenInfo(event.target);
+  const rows = info.rows;
   if (rows.length === 0) {
     hideHoverInfo();
     return;
   }
 
+  currentHoverTokenInfo = info;
   hoverInfo.replaceChildren(
     ...rows.map((row) => {
       const item = document.createElement("div");
@@ -357,6 +364,15 @@ function showHoverInfo(event) {
   );
   hoverInfo.hidden = false;
   positionHoverInfo(event);
+}
+
+function isolateHoveredForeground() {
+  if (hoverInfo.hidden || !currentHoverTokenInfo?.foreground) {
+    return;
+  }
+  setPreviewIsolation(
+    isolatedToken === currentHoverTokenInfo.foreground ? null : currentHoverTokenInfo.foreground,
+  );
 }
 
 function elementUsesToken(element, token) {
@@ -656,6 +672,7 @@ hoverInfo.hidden = true;
 document.body.append(hoverInfo);
 
 preview.addEventListener("mousemove", showHoverInfo);
+preview.addEventListener("click", isolateHoveredForeground);
 preview.addEventListener("mouseleave", hideHoverInfo);
 
 applyTheme();
