@@ -139,6 +139,11 @@ const themePanel = document.querySelector("#themePanel");
 const hideThemePanel = document.querySelector("#hideThemePanel");
 const showThemePanel = document.querySelector("#showThemePanel");
 const useBackgroundColor = document.querySelector("#useBackgroundColor");
+const useHoverInfo = document.querySelector("#useHoverInfo");
+const preview = document.querySelector(".terminal");
+const hoverInfo = document.createElement("div");
+
+let isolatedToken = null;
 
 function cssVarName(token) {
   return `--${token.replaceAll("_", "-")}`;
@@ -173,6 +178,28 @@ function rgbToHexValue(red, green, blue) {
     return null;
   }
   return `#${channels.join("")}`;
+}
+
+function hexToRgb(hex) {
+  return {
+    red: Number.parseInt(hex.slice(1, 3), 16),
+    green: Number.parseInt(hex.slice(3, 5), 16),
+    blue: Number.parseInt(hex.slice(5, 7), 16),
+  };
+}
+
+function mixHex(hex, targetHex, amount) {
+  const color = hexToRgb(hex);
+  const target = hexToRgb(targetHex);
+  const mixChannel = (channel, targetChannel) =>
+    Math.round(channel * amount + targetChannel * (1 - amount))
+      .toString(16)
+      .padStart(2, "0");
+
+  return `#${mixChannel(color.red, target.red)}${mixChannel(
+    color.green,
+    target.green,
+  )}${mixChannel(color.blue, target.blue)}`;
 }
 
 function colorFromText(value) {
@@ -239,6 +266,7 @@ function setToken(token, value) {
   theme[token] = hex;
   document.documentElement.style.setProperty(cssVarName(token), hex);
   syncInputs(token, hex);
+  setPreviewIsolation(isolatedToken);
   renderExport();
   return true;
 }
@@ -251,11 +279,166 @@ function syncInputs(token, value) {
   });
 }
 
+function tokenColor(token) {
+  if (token === "bg_canvas" && !useBackgroundColor.checked) {
+    return "#000000";
+  }
+  return theme[token];
+}
+
+function tokenSummary(label, token) {
+  if (!token) {
+    return null;
+  }
+  return `${label}: ${token} ${tokenColor(token)}`;
+}
+
+function closestPreviewElement(target, selector) {
+  const source = target instanceof Element ? target : target.parentElement;
+  const element = source?.closest(selector);
+  return element && preview.contains(element) ? element : null;
+}
+
+function hoverTokens(target) {
+  const foreground = closestPreviewElement(target, "[data-token]")?.dataset.token;
+  const background =
+    closestPreviewElement(target, "[data-token-bg]")?.dataset.tokenBg ||
+    preview.dataset.tokenBg;
+  const borderElement = closestPreviewElement(
+    target,
+    "[data-token-border], [data-token-border-top], [data-token-border-right], [data-token-border-bottom], [data-token-border-left]",
+  );
+  const borderTokens = borderElement
+    ? [
+        tokenSummary("Border", borderElement.dataset.tokenBorder),
+        tokenSummary("Border top", borderElement.dataset.tokenBorderTop),
+        tokenSummary("Border right", borderElement.dataset.tokenBorderRight),
+        tokenSummary("Border bottom", borderElement.dataset.tokenBorderBottom),
+        tokenSummary("Border left", borderElement.dataset.tokenBorderLeft),
+      ].filter(Boolean)
+    : [];
+
+  return [tokenSummary("FG", foreground), tokenSummary("BG", background), ...borderTokens].filter(
+    Boolean,
+  );
+}
+
+function positionHoverInfo(event) {
+  const offset = 14;
+  const rect = hoverInfo.getBoundingClientRect();
+  const maxLeft = window.innerWidth - rect.width - 8;
+  const maxTop = window.innerHeight - rect.height - 8;
+  hoverInfo.style.left = `${Math.max(8, Math.min(event.clientX + offset, maxLeft))}px`;
+  hoverInfo.style.top = `${Math.max(8, Math.min(event.clientY + offset, maxTop))}px`;
+}
+
+function hideHoverInfo() {
+  hoverInfo.hidden = true;
+}
+
+function showHoverInfo(event) {
+  if (!useHoverInfo.checked) {
+    hideHoverInfo();
+    return;
+  }
+
+  const rows = hoverTokens(event.target);
+  if (rows.length === 0) {
+    hideHoverInfo();
+    return;
+  }
+
+  hoverInfo.replaceChildren(
+    ...rows.map((row) => {
+      const item = document.createElement("div");
+      item.textContent = row;
+      return item;
+    }),
+  );
+  hoverInfo.hidden = false;
+  positionHoverInfo(event);
+}
+
+function elementUsesToken(element, token) {
+  return (
+    element.dataset.token === token ||
+    element.dataset.tokenBg === token ||
+    element.dataset.tokenBorder === token ||
+    element.dataset.tokenBorderTop === token ||
+    element.dataset.tokenBorderRight === token ||
+    element.dataset.tokenBorderBottom === token ||
+    element.dataset.tokenBorderLeft === token
+  );
+}
+
+function dimBorderSide(element, side, targetToken) {
+  if (!targetToken) {
+    return;
+  }
+  const dimmedColor = mixHex(tokenColor(targetToken), "#000000", 0.28);
+  element.style[side] = dimmedColor;
+}
+
+function setPreviewIsolation(token) {
+  isolatedToken = token;
+  preview.toggleAttribute("data-isolating-token", Boolean(token));
+  if (token) {
+    preview.dataset.isolatingToken = token;
+  } else {
+    delete preview.dataset.isolatingToken;
+  }
+
+  [
+    preview,
+    ...preview.querySelectorAll(
+      "[data-token], [data-token-bg], [data-token-border], [data-token-border-top], [data-token-border-right], [data-token-border-bottom], [data-token-border-left]",
+    ),
+  ].forEach((element) => {
+    const isMatch = Boolean(token && elementUsesToken(element, token));
+    const isDimmed = Boolean(token && !isMatch);
+    element.classList.toggle("is-preview-match", isMatch);
+    element.classList.toggle("is-preview-dimmed", isDimmed);
+
+    element.style.removeProperty("color");
+    element.style.removeProperty("background");
+    element.style.removeProperty("border-color");
+    element.style.removeProperty("border-top-color");
+    element.style.removeProperty("border-right-color");
+    element.style.removeProperty("border-bottom-color");
+    element.style.removeProperty("border-left-color");
+
+    if (isDimmed && element.dataset.token) {
+      const dimmedColor = mixHex(tokenColor(element.dataset.token), "#000000", 0.28);
+      element.style.color = dimmedColor;
+      element.style.borderColor = dimmedColor;
+    }
+    if (isDimmed && element.dataset.tokenBg) {
+      element.style.background = mixHex(tokenColor(element.dataset.tokenBg), "#000000", 0.22);
+    }
+    if (isDimmed) {
+      dimBorderSide(element, "borderColor", element.dataset.tokenBorder);
+      dimBorderSide(element, "borderTopColor", element.dataset.tokenBorderTop);
+      dimBorderSide(element, "borderRightColor", element.dataset.tokenBorderRight);
+      dimBorderSide(element, "borderBottomColor", element.dataset.tokenBorderBottom);
+      dimBorderSide(element, "borderLeftColor", element.dataset.tokenBorderLeft);
+    }
+  });
+
+  document.querySelectorAll("[data-isolate-token]").forEach((button) => {
+    const isPressed = button.dataset.isolateToken === token;
+    button.classList.toggle("is-active", isPressed);
+    button.setAttribute("aria-pressed", String(isPressed));
+  });
+}
+
 function renderTokenRows() {
   tokenList.replaceChildren(
     ...tokens.map(([token, desc]) => {
       const row = document.createElement("div");
       row.className = "token-row";
+
+      const tools = document.createElement("div");
+      tools.className = "token-tools";
 
       const info = document.createElement("button");
       info.type = "button";
@@ -263,6 +446,15 @@ function renderTokenRows() {
       info.textContent = "i";
       info.dataset.tooltip = tokenDetails[token];
       info.setAttribute("aria-label", `${token}: ${tokenDetails[token]}`);
+
+      const isolate = document.createElement("button");
+      isolate.type = "button";
+      isolate.className = "token-isolate";
+      isolate.textContent = "o";
+      isolate.dataset.isolateToken = token;
+      isolate.setAttribute("aria-label", `Dim preview elements not using ${token}`);
+      isolate.setAttribute("aria-pressed", "false");
+      isolate.title = `Isolate ${token} in preview`;
 
       const name = document.createElement("span");
       name.className = "token-name";
@@ -293,10 +485,16 @@ function renderTokenRows() {
         }
       });
 
-      row.append(info, name, color, hex);
+      isolate.addEventListener("click", () => {
+        setPreviewIsolation(isolatedToken === token ? null : token);
+      });
+
+      tools.append(info, isolate);
+      row.append(tools, name, color, hex);
       return row;
     }),
   );
+  setPreviewIsolation(isolatedToken);
 }
 
 function groupLabel(group) {
@@ -378,6 +576,7 @@ function applyTheme() {
     document.documentElement.style.setProperty(cssVarName(token), theme[token]);
   }
   applyBackgroundColorMode();
+  setPreviewIsolation(isolatedToken);
 }
 
 function applyBackgroundColorMode() {
@@ -385,6 +584,7 @@ function applyBackgroundColorMode() {
     "data-static-background",
     !useBackgroundColor.checked,
   );
+  setPreviewIsolation(isolatedToken);
 }
 
 resetButton.addEventListener("click", () => {
@@ -449,6 +649,14 @@ showThemePanel.addEventListener("click", () => {
 });
 
 useBackgroundColor.addEventListener("change", applyBackgroundColorMode);
+useHoverInfo.addEventListener("change", hideHoverInfo);
+
+hoverInfo.className = "hover-info";
+hoverInfo.hidden = true;
+document.body.append(hoverInfo);
+
+preview.addEventListener("mousemove", showHoverInfo);
+preview.addEventListener("mouseleave", hideHoverInfo);
 
 applyTheme();
 renderPresetOptions();

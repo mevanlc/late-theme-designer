@@ -29,10 +29,16 @@
           <div id="tokenList" class="token-list"></div>
 
           <footer class="dialog-footer">
-            <label class="background-toggle">
-              <input id="useBackgroundColor" type="checkbox" checked />
-              <span>BG Color</span>
-            </label>
+            <div class="footer-options">
+              <label class="background-toggle">
+                <input id="useBackgroundColor" type="checkbox" checked />
+                <span>BG Color</span>
+              </label>
+              <label class="background-toggle">
+                <input id="useHoverInfo" type="checkbox" checked />
+                <span>Hover Info</span>
+              </label>
+            </div>
             <button id="importButton" class="command-button secondary" type="button">Import</button>
             <button id="exportButton" class="command-button" type="button">Export</button>
           </footer>
@@ -45,7 +51,7 @@
             <div class="titlebar">
               <span class="brand" data-token="text_bright">late.sh</span>
               <span class="pipe" data-token="border_dim">|</span>
-              <span class="tab active">1</span>
+              <span class="tab active" data-token="bg_selection" data-token-bg="amber">1</span>
               <span class="tab" data-token="text_dim">2</span>
               <span class="tab" data-token="text_dim">3</span>
               <span class="tab" data-token="text_dim">4</span>
@@ -212,7 +218,7 @@
                   <div class="wire-bottom"></div>
                 </section>
 
-                <div class="pinned-row">
+                <div class="pinned-row" data-token-border-top="border_dim" data-token-border-bottom="amber_dim">
                   <span data-token="amber">●</span>
                   <span data-token="text">Breaking Changes for the CLI - please update! :) - curl -fsSL https://cli.late.sh/install.sh | bash (or press P)</span>
                 </div>

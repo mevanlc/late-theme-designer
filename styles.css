@@ -124,6 +124,20 @@ textarea {
   z-index: 2;
 }
 
+.terminal[data-isolating-token] {
+  border-color: #111111;
+}
+
+.terminal[data-isolating-token]::before {
+  color: #282828;
+  background: #141414;
+}
+
+.terminal[data-isolating-token]::after {
+  background: #30140f;
+  box-shadow: 18px 0 #30240f, 36px 0 #143018;
+}
+
 .frame {
   --rail-column: 230px;
   --sidebar-column: 238px;
@@ -797,8 +811,14 @@ strong {
   grid-template-columns: 18px minmax(0, 1fr) 66px 82px;
   gap: 5px;
   align-items: center;
-  min-height: 42px;
+  min-height: 52px;
   border-bottom: 1px solid #2d2d2d;
+}
+
+.token-tools {
+  display: grid;
+  justify-items: center;
+  gap: 4px;
 }
 
 .token-info {
@@ -848,6 +868,28 @@ strong {
   transform: translateY(-50%) translateX(0);
 }
 
+.token-isolate {
+  inline-size: 16px;
+  block-size: 16px;
+  border: 1px solid #4a4a4a;
+  border-radius: 3px;
+  padding: 0;
+  background: #1b1b1b;
+  color: #969696;
+  font-size: 10px;
+  line-height: 14px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.token-isolate:hover,
+.token-isolate:focus-visible,
+.token-isolate.is-active {
+  border-color: #4f87c8;
+  color: #ffffff;
+  background: #0e639c;
+}
+
 .token-name {
   color: #d4d4d4;
   min-width: 0;
@@ -887,12 +929,18 @@ strong {
   border-bottom: 0;
 }
 
+.footer-options {
+  display: grid;
+  gap: 7px;
+  flex: 0 0 auto;
+  margin-right: auto;
+}
+
 .background-toggle {
   display: inline-flex;
   align-items: center;
   gap: 6px;
   flex: 0 0 auto;
-  margin-right: auto;
   color: #d4d4d4;
   font-size: 13px;
   line-height: 1;
@@ -939,6 +987,26 @@ strong {
   color: #969696;
 }
 
+.hover-info {
+  position: fixed;
+  z-index: 30;
+  min-width: 168px;
+  max-width: min(320px, calc(100vw - 16px));
+  border: 1px solid #4a4a4a;
+  padding: 7px 9px;
+  background: #111827;
+  color: #e7e7e7;
+  box-shadow: 0 14px 36px rgb(0 0 0 / 60%);
+  font-size: 12px;
+  line-height: 1.45;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.hover-info[hidden] {
+  display: none;
+}
+
 [data-token="bg_canvas"] { color: var(--bg-canvas); }
 [data-token="bg_selection"] { color: var(--bg-selection); }
 [data-token="bg_highlight"] { color: var(--bg-highlight); }
@@ -970,6 +1038,7 @@ strong {
 [data-token-bg="bg_canvas"] { background: var(--tui-bg-canvas); }
 [data-token-bg="bg_selection"] { background: var(--bg-selection); }
 [data-token-bg="bg_highlight"] { background: var(--bg-highlight); }
+[data-token-bg="amber"] { background: var(--amber); }
 
 @container (max-width: 1180px) {
   .frame {
